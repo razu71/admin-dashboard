@@ -1,4 +1,4 @@
-name: Deploy dashboard
+name: Deploy admin dashboard
 
 on:
     push:
