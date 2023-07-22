@@ -1,0 +1,23 @@
+name: Deploy dashboard
+
+on:
+    push:
+        branches: [ "master" ]
+
+jobs:
+
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            -   name: Get latest code
+                uses: actions/checkout@v3
+
+            -   name: Deploy to server via ssh
+                uses: appleboy/ssh-action@v0.1.7
+                with:
+                    host: ${{ secrets.HOST }}
+                    username: ${{ secrets.USER }}
+                    password: ${{ secrets.PASSWORD }}
+                    port: ${{ secrets.PORT }}
+                    script: "cd public_html/dashboard/ && sh ./.scripts/deploy.sh"
